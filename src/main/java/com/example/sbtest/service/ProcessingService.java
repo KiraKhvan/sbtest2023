@@ -11,7 +11,7 @@ public interface ProcessingService {
             @Nonnull UUID senderCardId,
             @Nonnull UUID recipientCardId,
             @Nonnull BigDecimal amount
-    ) throws Exception;
+    );
 
-    void accrualMoney(UUID recipientCardId, BigDecimal amount) throws Exception;
+    void accrualMoney(UUID recipientCardId, BigDecimal amount);
 }

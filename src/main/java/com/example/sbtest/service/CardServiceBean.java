@@ -26,7 +26,7 @@ public class CardServiceBean implements CardService {
     ClientRepository clientRepository;
 
     @Override
-    public Card createCard(UUID clientId) throws Exception {
+    public Card createCard(UUID clientId) {
         Optional<Client> ownerObj = clientRepository.findById(clientId);
         Client owner = ownerObj.orElseThrow(
                 () -> new NotFoundException(Client.class, clientId)
@@ -39,7 +39,7 @@ public class CardServiceBean implements CardService {
     }
 
     @Override
-    public boolean issueCard(UUID cardId) throws Exception {
+    public boolean issueCard(UUID cardId) {
         Optional<Card> cardOptional = cardRepository.findById(cardId);
         Card card = cardOptional.orElseThrow(
                 () -> new NotFoundException(Card.class, cardId)
@@ -51,7 +51,7 @@ public class CardServiceBean implements CardService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {BadRequestException.class, NotFoundException.class})
-    public Card loadAndCheck(UUID cardId) throws Exception {
+    public Card loadAndCheck(UUID cardId) {
         if (cardId == null) {
             throw new BadRequestException("Card ID is empty.");
         }
@@ -67,7 +67,7 @@ public class CardServiceBean implements CardService {
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BadRequestException.class)
     @Override
-    public void editCardBalance(Card card, BigDecimal amount, CardBalanceOperation operation) throws Exception {
+    public void editCardBalance(Card card, BigDecimal amount, CardBalanceOperation operation) {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new BadRequestException("Сумма задана некорректно.");
         }

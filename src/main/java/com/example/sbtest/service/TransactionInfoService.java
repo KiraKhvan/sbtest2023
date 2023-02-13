@@ -11,5 +11,5 @@ public interface TransactionInfoService {
             Card senderCard,
             Card recipientCard,
             BigDecimal amount
-    ) throws Exception;
+    );
 }

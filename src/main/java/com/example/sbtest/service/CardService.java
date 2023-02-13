@@ -8,11 +8,11 @@ import java.util.UUID;
 
 public interface CardService {
 
-    Card createCard(UUID clientId) throws Exception;
+    Card createCard(UUID clientId);
 
-    boolean issueCard(UUID cardId) throws Exception;
+    boolean issueCard(UUID cardId);
 
-    Card loadAndCheck(UUID cardId) throws Exception;
+    Card loadAndCheck(UUID cardId);
 
-    void editCardBalance(Card card, BigDecimal amount, CardBalanceOperation operation) throws Exception;
+    void editCardBalance(Card card, BigDecimal amount, CardBalanceOperation operation);
 }

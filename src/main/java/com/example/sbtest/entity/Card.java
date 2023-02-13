@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Table(name = "Card", indexes = {
@@ -42,6 +43,12 @@ public class Card {
 
     @Version
     private Integer version;
+
+    @OneToMany(mappedBy = "senderCard", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TransactionInfo> outgoingTransactionList;
+
+    @OneToMany(mappedBy = "recipientCard", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TransactionInfo> incomingTransactionList;
 
     public void addBalance(BigDecimal amount) {
         BigDecimal newSenderBalance = getBalance().add(amount);

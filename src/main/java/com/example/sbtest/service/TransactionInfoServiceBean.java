@@ -5,7 +5,6 @@ import com.example.sbtest.entity.TransactionInfo;
 import com.example.sbtest.repository.TransactionInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -18,12 +17,12 @@ public class TransactionInfoServiceBean implements TransactionInfoService {
     TransactionInfoRepository transactionInfoRepository;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional
     public TransactionInfo createTransactionInfo(
             Card senderCard,
             Card recipientCard,
             BigDecimal amount
-    ) throws Exception {
+    ) {
         TransactionInfo transactionInfo = new TransactionInfo();
         transactionInfo.setSenderCard(senderCard);
         transactionInfo.setRecipientCard(recipientCard);

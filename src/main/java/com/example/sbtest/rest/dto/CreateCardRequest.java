@@ -4,15 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Accessors(chain = true)
-public class TransferDto {
-
-    private UUID senderCardId;
-    private UUID recipientCardId;
-    private BigDecimal amount;
+public class CreateCardRequest {
+    UUID clientId;
 }

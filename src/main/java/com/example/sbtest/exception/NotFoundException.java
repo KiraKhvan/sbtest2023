@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.UUID;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class NotFoundException extends Exception {
+public class NotFoundException extends RuntimeException {
 
     public NotFoundException(Class cls, UUID entityId) {
         super(buildErrorMessage(cls, entityId));

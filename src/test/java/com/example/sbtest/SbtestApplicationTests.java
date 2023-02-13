@@ -9,10 +9,6 @@ import com.example.sbtest.repository.ClientRepository;
 import com.example.sbtest.repository.TransactionInfoRepository;
 import com.example.sbtest.service.CardService;
 import com.example.sbtest.service.ProcessingService;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +17,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.stream.IntStream;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig
@@ -45,13 +39,17 @@ class SbtestApplicationTests {
     ProcessingService processingService;
 
     @Test
-    void test1() throws Exception {
+    void test1() {
         test();
     }
 
     @Test
-    void stressTest() throws Exception {
+    void test2() {
+        test();
+    }
 
+    @Test
+    void stressTest() {
         IntStream.range(0, 1000).forEach(i -> {
             Client client = new Client();
             client.setFirstName("Иван");
@@ -66,11 +64,15 @@ class SbtestApplicationTests {
                 }
             });
         });
-        System.out.println("Count: " + cardRepository.count());
         test();
+        //   transactionInfoRepository.deleteAll();
+        //  cardRepository.deleteAll();
+        //  clientRepository.deleteAll();
     }
 
-    public void test() throws Exception {
+    public void test() {
+        long start = System.currentTimeMillis();
+        System.out.println("Start_" + start + "_Count_" + cardRepository.count());
         //Создаем отправителя
         Client senderClient = new Client();
         senderClient.setFirstName("Иван");
@@ -148,5 +150,8 @@ class SbtestApplicationTests {
         assertEquals(transactionInfo.getAmount(), amount);
         assertEquals(transactionInfo.getRecipientCard().getId(), recipientCardId);
         assertEquals(transactionInfo.getSenderCard().getId(), senderCardId);
+        long end = System.currentTimeMillis();
+        System.out.println("End_" + end);
+        System.out.println("Work_time_" + (start - end));
     }
 }

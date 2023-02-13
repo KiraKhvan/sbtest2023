@@ -24,6 +24,7 @@ dependencies {
 	implementation 'org.junit.jupiter:junit-jupiter-engine'
 	implementation 'org.junit.jupiter:junit-jupiter-params'
 	implementation 'org.junit.platform:junit-platform-suite'
+	implementation 'org.apache.httpcomponents:httpclient'
 }
 
 tasks.named('test') {

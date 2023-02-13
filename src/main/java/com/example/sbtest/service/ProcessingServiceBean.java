@@ -31,7 +31,7 @@ public class ProcessingServiceBean implements ProcessingService {
             UUID senderCardId,
             UUID recipientCardId,
             BigDecimal amount
-    ) throws Exception {
+    ) {
         Card senderCard = cardService.loadAndCheck(senderCardId);
         Card recipientCard = cardService.loadAndCheck(recipientCardId);
         cardService.editCardBalance(recipientCard, amount, CardBalanceOperation.ADD);
@@ -44,7 +44,7 @@ public class ProcessingServiceBean implements ProcessingService {
             rollbackFor = {BadRequestException.class, NotFoundException.class}
     )
     @Override
-    public void accrualMoney(UUID recipientCardId, BigDecimal amount) throws Exception {
+    public void accrualMoney(UUID recipientCardId, BigDecimal amount) {
         Card recipientCard = cardService.loadAndCheck(recipientCardId);
         cardService.editCardBalance(recipientCard, amount, CardBalanceOperation.ADD);
     }
